@@ -2,9 +2,10 @@
 import { galleryItems } from './gallery-items.js';
 
 // Change code below this line
-console.log(galleryItems);
+// console.log(galleryItems);
 
 const gallery = document.querySelector('.gallery');
+let instance;
 
 function createMarkup() {
     let markup = '';
@@ -21,8 +22,16 @@ function createMarkup() {
 </li>`;
         markup += content;
     });
-    console.log(markup);
+    // console.log(markup);
     gallery.insertAdjacentHTML('beforeend', markup);
+}
+
+function closeModal(event) {
+    console.dir(event);
+    if (event.code === 'Escape') {
+        instance.close();
+        document.removeEventListener('keydown', closeModal);
+    }
 }
 
 function onImageClick(event) {
@@ -37,11 +46,13 @@ function onImageClick(event) {
     const originalLink = target.dataset.source;
     console.log(originalLink);
 
-    const instance = basicLightbox.create(
-        /* html */ `<div><img src="${originalLink}" width="1000om" ></div>`,
+    instance = basicLightbox.create(
+        /* html */ `<div><img src="${originalLink}" width="1000px" ></div>`,
     );
     instance.show();
+
+    document.addEventListener('keydown', closeModal);
 }
-// style="margin: auto; display: block"
 createMarkup();
+// document.addEventListener('keydown', closeModal);
 gallery.addEventListener('click', onImageClick);
