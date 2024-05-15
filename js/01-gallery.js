@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/extensions
 import { galleryItems } from './gallery-items.js';
+
 // Change code below this line
 console.log(galleryItems);
 
@@ -32,10 +33,15 @@ function onImageClick(event) {
         console.log('мимo');
         return;
     }
-    console.log('okay');
+    console.dir(target);
     const originalLink = target.dataset.source;
     console.log(originalLink);
-}
 
+    const instance = basicLightbox.create(
+        /* html */ `<div><img src="${originalLink}" width="1000om" ></div>`,
+    );
+    instance.show();
+}
+// style="margin: auto; display: block"
 createMarkup();
 gallery.addEventListener('click', onImageClick);
