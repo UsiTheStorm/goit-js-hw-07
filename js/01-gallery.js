@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/extensions
+/* global basicLightbox */
 import { galleryItems } from './gallery-items.js';
 
 const gallery = document.querySelector('.gallery');
